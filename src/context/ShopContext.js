@@ -10,7 +10,7 @@ export const ShopProvider = ({ children }) => {
     const [pData, setPData] = useState([...apiData])
     const pDataRf = useRef([...apiData])
 
-    const [gn, setGn] = useState([...new Set(apiData.map(el => el.gender))])
+    const gn = [...new Set(apiData.map(el => el.gender))]
     const [ct, setCt] = useState([...new Set(apiData.map(el => el.category))])
     const [bn, setBn] = useState([...new Set(apiData.map(el => el.brand))])
 

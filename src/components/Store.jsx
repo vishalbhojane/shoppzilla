@@ -22,7 +22,7 @@ const Store = () => {
                     {
                         productsData.map(el =>
                             <Card key={el.id}>
-                                <img className="product__img" src={el.image} />
+                                <img className="product__img" src={el.image} alt=""/>
                                 <h3 className="product__title">{el.brand}</h3>
                                 <p className="product__desc">{el.description}</p>
                                 <p className="product__price">{el.price}</p>
