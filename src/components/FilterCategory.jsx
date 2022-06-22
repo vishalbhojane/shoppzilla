@@ -8,7 +8,7 @@ const FilterCategory = () => {
     return (
         <>
             <h1>Categories</h1>
-            <ul onChange={(e)=>{mainFilter(e)}}>
+            <ul className="category-list ml-10 text-capitalize" onChange={(e)=>{mainFilter(e)}}>
                 {categories.map((el,i) => <Checkbox type={'checkbox'} title={el} key={i} name="category"/>)}
             </ul>
         </>

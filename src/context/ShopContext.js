@@ -26,6 +26,10 @@ export const ShopProvider = ({ children }) => {
     const ftpCt = useRef([])
     const ftpBn = useRef([])
 
+    const [wishlistData, setWishlistData] = useState([])
+    const [showWishlist, setShowwishlist] = useState(false)
+
+    const [cartSummaryData, setcartSummaryData] = useState([])
     
     const ftUpdater = (e, arr) => {
         if (e.target.checked) {
@@ -80,8 +84,15 @@ export const ShopProvider = ({ children }) => {
         
         setPData(ftpBn.current)
     }
-    
 
+    const handleAddToWishList = (el) => {
+        setWishlistData([el, ...wishlistData])
+    }
+
+    const handleAddToCart = (el) => {
+        setcartSummaryData([el, ...cartSummaryData])
+    }
+    
     return (
         <ShopContext.Provider
             value={{
@@ -89,9 +100,15 @@ export const ShopProvider = ({ children }) => {
                 brands: bn,
                 categories: ct,
                 genders: gn,
-
+                wishlistData,
+                showWishlist,
+                cartSummaryData,
+                
                 //Functions
-                mainFilter
+                mainFilter,
+                handleAddToWishList,
+                setShowwishlist,
+                handleAddToCart,
             }}
         >{children}</ShopContext.Provider>
     )

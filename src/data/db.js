@@ -5,7 +5,7 @@ export const data = [
       "description": "Teal green Tropical printed T-shirt, has a round neck, and long sleeves",
       "brand": "Urbano Fashion",
       "gender": "men",
-      "category": "tshirt",
+      "category": "t-shirt",
       "image": "/images/1001-1.jpg",
       "price": 1099,
       "discountPrice": 599

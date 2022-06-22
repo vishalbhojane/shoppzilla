@@ -7,7 +7,7 @@ const FilterGender = () => {
 
     return (
         <>
-            <ul className="gender-list" onChange={(e) => { mainFilter(e) }}>
+            <ul className="gender-list ml-10 text-capitalize" onChange={(e) => { mainFilter(e) }}>
                 {genders.map((el, i) => <Checkbox type='checkbox' title={el} key={i} name="gender"/>)}
             </ul>
         </>
