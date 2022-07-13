@@ -6,7 +6,7 @@ export const data = [
       "brand": "Urbano Fashion",
       "gender": "men",
       "category": "t-shirt",
-      "image": "/images/1001-1.jpg",
+      "image": "data/shop/images/1001-1.jpg",
       "price": 1099,
       "discountPrice": 599
     },
@@ -17,7 +17,7 @@ export const data = [
       "brand": "FIDO DIDO",
       "gender": "men",
       "category": "t-shirt",
-      "image": "/images/1002-1.jpg",
+      "image": "data/shop/images/1002-1.jpg",
       "price": 1499,
       "discountPrice": 599
     },
@@ -28,7 +28,7 @@ export const data = [
       "brand": "Roadster",
       "gender": "men",
       "category": "t-shirt",
-      "image": "/images/1003-1.jpg",
+      "image": "data/shop/images/1003-1.jpg",
       "price": 899,
       "discountPrice": 359
     },
@@ -39,7 +39,7 @@ export const data = [
       "brand": "Roadster",
       "gender": "men",
       "category": "t-shirt",
-      "image": "/images/1004-1.jpg",
+      "image": "data/shop/images/1004-1.jpg",
       "price": 799,
       "discountPrice": 279
     },
@@ -50,7 +50,7 @@ export const data = [
       "brand": "Antheaa",
       "gender": "women",
       "category": "dress",
-      "image": "/images/2001-1.jpg",
+      "image": "data/shop/images/2001-1.jpg",
       "price": 2459,
       "discountPrice": 1081
     },
@@ -61,7 +61,7 @@ export const data = [
       "brand": "SASSAFRAS",
       "gender": "women",
       "category": "dress",
-      "image": "/images/2002-1.jpg",
+      "image": "data/shop/images/2002-1.jpg",
       "price": 2399,
       "discountPrice": 791
     },
@@ -72,7 +72,7 @@ export const data = [
       "brand": "RARE",
       "gender": "women",
       "category": "dress",
-      "image": "/images/2003-1.jpg",
+      "image": "data/shop/images/2003-1.jpg",
       "price": 2399,
       "discountPrice": 887
     },
@@ -83,7 +83,7 @@ export const data = [
       "brand": "RARE",
       "gender": "women",
       "category": "dress",
-      "image": "/images/2004-1.jpg",
+      "image": "data/shop/images/2004-1.jpg",
       "price": 2399,
       "discountPrice": 887
     }
