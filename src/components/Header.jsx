@@ -16,8 +16,9 @@ const Header = () => {
 
                 <nav className='flex-c-sb g-10 rel'>
                     <Link className='logo' to="/store">Store</Link>
-                    {wishlistData.length > 0 ? <AiFillHeart color="#ff517b"/> : <AiOutlineHeart/>}
-                    <RiShoppingBagLine/>
+                    <Link className='flex-c' to="/wishlist">{wishlistData.length > 0 ? <AiFillHeart color="#ff517b"/> : <AiOutlineHeart/>}</Link>
+                    <Link className='flex-c' to="/cart"><RiShoppingBagLine/></Link>
+                    
                 </nav>
             </header>
         </>

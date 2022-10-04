@@ -10,9 +10,9 @@ const Home = () => {
         <>
             <div className="hero-wrap rel">
                 <img className="hero-bg-img" src={heroImgMedium} srcSet={`${heroImgSmall} 300w, ${heroImgMedium} 640w, ${heroImgLarge} 1280w`} alt=""/>
-                <div className='ab-cc cta flex-cc flex-column g-25'>
-                    <h1 className='hero-tagline'>Stylish and sophisticated fashion boutique</h1>
-                    <button className="cta-theme p-10-20"> <Link to="/store">Shop Now</Link></button>
+                <div className='ab-c flex-c flex-column g-25'>
+                    <h1 className='hero-tagline text-center'>Stylish and sophisticated fashion boutique</h1>
+                    <Link to="/store" className='cta-theme p-10-20'>Shop Now</Link>
                 </div>
             </div>
         </>
