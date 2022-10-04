@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { createContext, useRef, useState } from "react";
 import { data } from '../data/db'
 
@@ -7,7 +7,7 @@ const ShopContext = createContext();
 export const ShopProvider = ({ children }) => {
     const apiData = data
     const TAX_CLOTHES = 5
-    
+
 
     const [pData, setPData] = useState([...apiData])
     const pDataRf = useRef([...apiData])
@@ -18,11 +18,11 @@ export const ShopProvider = ({ children }) => {
 
     const ctRf = useRef([])
     const bnRf = useRef([])
-    
+
     const ftGn = useRef([]);
     const ftCt = useRef([]);
     const ftBn = useRef([]);
-    
+
     const ftpTemp = useRef([])
     const ftpGn = useRef([])
     const ftpCt = useRef([])
@@ -32,14 +32,14 @@ export const ShopProvider = ({ children }) => {
     const bgD = useRef(0)
     const txT = useRef(0)
     const orT = useRef(0)
-    
+
     const [bagTotal, setBagTotal] = useState(0)
     const [bagDiscount, setBagDiscount] = useState(0)
     const [taxTotal, setTaxTotal] = useState(0)
     const [orderTotal, setOrderTotal] = useState(0)
-    
+
     const [wishlistData, setWishlistData] = useState([])
-    
+
     const cartRef = useRef([])
     const [cartData, setcartData] = useState([])
 
@@ -49,13 +49,13 @@ export const ShopProvider = ({ children }) => {
     const [fdi, setFdi] = useState(ldi - postsPerPage)
 
     const [pagedData, setPageData] = useState([])
-    
+
     const screenWidth = useRef(window.screen.width)
 
     const getNewKey = () => {
         return `${new Date().getTime().toString()}`
     }
-    
+
     const ftUpdater = (e, arr) => {
         if (e.target.checked) {
             arr.push(e.target.value)
@@ -66,17 +66,17 @@ export const ShopProvider = ({ children }) => {
     }
 
     const mainFilter = (e) => {
-    
+
         e.target.name === "gender" && ftUpdater(e, ftGn.current)
-        
-        if(!!ftGn.current.length) {
+
+        if (!!ftGn.current.length) {
             ftpTemp.current = [...pDataRf.current.filter((item) => ftGn.current.includes(item.gender))]
             ftpGn.current = ftpTemp.current
             ctRf.current = [...new Set(ftpGn.current.map(el => el.category))]
             bnRf.current = [...new Set(ftpGn.current.map(el => el.brand))]
             setCt(ctRf.current)
             setBn(bnRf.current)
-        } else if(!ftGn.current.length) {
+        } else if (!ftGn.current.length) {
             ftpTemp.current = [...apiData]
             ftpGn.current = ftpTemp.current
             setCt([...new Set(apiData.map(el => el.category))])
@@ -85,32 +85,32 @@ export const ShopProvider = ({ children }) => {
 
         e.target.name === "category" && ftUpdater(e, ftCt.current)
 
-        if(!!ftCt.current.length) {
+        if (!!ftCt.current.length) {
             ftpTemp.current = [...ftpTemp.current.filter((item) => ftCt.current.includes(item.category))]
             ftpCt.current = ftpTemp.current
             bnRf.current = [...new Set(ftpCt.current.map(el => el.brand))]
             setBn(bnRf.current)
-        } else if(!ftCt.current.length) {
+        } else if (!ftCt.current.length) {
             ftpTemp.current = ftpGn.current
             ftpCt.current = ftpTemp.current
             setBn([...new Set(ftpGn.current.map(el => el.brand))])
         }
 
         e.target.name === "brand" && ftUpdater(e, ftBn.current)
-        
-        if(!!ftBn.current.length) {
+
+        if (!!ftBn.current.length) {
             ftpTemp.current = [...ftpTemp.current.filter((item) => ftBn.current.includes(item.brand))]
             ftpBn.current = ftpTemp.current
-        } else if(!ftBn.current.length) {
+        } else if (!ftBn.current.length) {
             ftpTemp.current = ftpCt.current
             ftpBn.current = ftpTemp.current
         }
-        
+
         setPData(ftpBn.current)
     }
 
     const handleAddToWishList = (el) => {
-        if(!wishlistData.includes(el)){
+        if (!wishlistData.includes(el)) {
             el.wishlist = true
             setWishlistData([el, ...wishlistData])
         }
@@ -121,11 +121,11 @@ export const ShopProvider = ({ children }) => {
 
     const handleRemoveFromWishList = (el) => {
         el.wishlist = false
-            setWishlistData(wishlistData.filter(data => data !== el))
+        setWishlistData(wishlistData.filter(data => data !== el))
     }
 
     const handleAddToCart = (el) => {
-        if(!cartData.includes(el)){
+        if (!cartData.includes(el)) {
             el.cart = true
             el.cartQuantity = 1
             setcartData([el, ...cartData])
@@ -141,45 +141,45 @@ export const ShopProvider = ({ children }) => {
     const handleCartQuantity = (el, action) => {
         cartRef.current = []
 
-        if(action === "add") el.cartQuantity += 1
-        if(action === 'remove' && el.cartQuantity > 1) el.cartQuantity -= 1
+        if (action === "add") el.cartQuantity += 1
+        if (action === 'remove' && el.cartQuantity > 1) el.cartQuantity -= 1
 
-        cartData.map((data) => {
-            if(el.id === data.id) data.cartQuantity = el.cartQuantity
+        cartData.forEach((data) => {
+            if (el.id === data.id) data.cartQuantity = el.cartQuantity
             cartRef.current.push(data)
         })
 
         setcartData(cartRef.current)
     }
 
-    const updateCart = () => {
+    const updateCart = useCallback(() => {
         bgT.current = 0;
         bgD.current = 0;
         txT.current = 0;
         orT.current = 0;
-        cartData.map(el => {
+        cartData.forEach(el => {
             bgT.current += (el.price * el.cartQuantity)
             bgD.current += ((el.price - el.discountPrice) * el.cartQuantity)
         })
-        txT.current = parseFloat(((bgT.current - bgD.current) * (TAX_CLOTHES/100)).toFixed(2))
+        txT.current = parseFloat(((bgT.current - bgD.current) * (TAX_CLOTHES / 100)).toFixed(2))
         orT.current = bgT.current - bgD.current + txT.current
 
         setBagTotal(bgT.current)
         setBagDiscount(bgD.current)
         setTaxTotal(txT.current)
         setOrderTotal(orT.current)
-    }
+    },[cartData])
 
-    useEffect(()=>{
+    useEffect(() => {
         updateCart()
-    }, [cartData])
+    }, [cartData, updateCart])
 
     // useEffect(()=>{
     //     setPageData(pData.slice(fdi, ldi))
     // },[pData.length])
 
-    window.addEventListener('resize', ()=>{screenWidth.current = window.screen.width})
-    
+    window.addEventListener('resize', () => { screenWidth.current = window.screen.width })
+
     return (
         <ShopContext.Provider
             value={{
@@ -202,12 +202,13 @@ export const ShopProvider = ({ children }) => {
                 fdi,
                 pagedData,
 
-                
+
                 setCurrentPage,
                 setPostsPerPage,
+                setPageData,
                 setLpi: setLdi,
                 setFpi: setFdi,
-                
+
                 //Functions
                 getNewKey,
                 mainFilter,
